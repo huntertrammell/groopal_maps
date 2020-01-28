@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Contains groopal_maps.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function groopal_maps_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the groopal_maps module.
+    case 'help.page.groopal_maps':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Groopal Maps creates a simple map block to be placed anywhere on your site. When placing the block you will have the ability to enter in your googlemaps API key, location(s), custom icons and more to come.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function groopal_maps_theme() {
+  return [
+    'groopal_maps' => [
+      'render element' => 'children',
+    ],
+    'groopal_maps_block' => [
+      'variables' => [
+        'content' => NULL
+      ],
+      'render element' => 'children',
+    ],
+  ];
+}
