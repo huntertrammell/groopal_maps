@@ -27,6 +27,8 @@
   //  Zoom
   //  Map Height
   //  Map Width
+  //  Map Colors (use google default select + have option for code editor to enter JSON)
+  //  Map Options - Relating to UI/UX
   */
 var map;
 function initMap() {
@@ -35,7 +37,30 @@ center: {
 lat: 39.060347,
 lng: -94.505615
 },
-zoom: 10
+zoom: 10,
+disableDefaultUI: true,
+MapOptions: {
+zoomControl: false,
+mapTypeControl: false,
+scaleControl: false,
+streetViewControl: false,
+rotateControl: false,
+fullscreenControl: false
+}
+});
+// need to update to marker cluster to allow multiple marker to be displayed
+var marker = new google.maps.Marker({
+position: {
+lat: 39.102565,
+lng: -94.583869
+},
+map: map,
+title: 'Central Library'
+});
+var infowindow = new google.maps.InfoWindow({content: marker.title});
+
+marker.addListener('click', function () {
+infowindow.open(map, marker);
 });
 }
 </script>
