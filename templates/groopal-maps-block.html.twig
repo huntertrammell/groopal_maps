@@ -11,8 +11,32 @@
 {% set classes = [
     'clear-both',
 ] %}
-<div{{ attributes.addClass(classes) }}>
-    {% for value in content %}
-        <p>{{value}}</p>
-    {% endfor %}
-</div>
+
+<style>
+	#map {
+		height: 45vh;
+	}
+</style>
+
+<div id="map" {{attributes.addClass(classes)}}></div>
+<script>
+	/* All configurations will be updated to be twig variables. possible to keep it simple can have 3 color profiles to choose from
+  // need to add field for the following:
+  //  Latitude,
+  //  Longitude,
+  //  Zoom
+  //  Map Height
+  //  Map Width
+  */
+var map;
+function initMap() {
+map = new google.maps.Map(document.getElementById('map'), {
+center: {
+lat: 39.060347,
+lng: -94.505615
+},
+zoom: 10
+});
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{content.api_key}}&callback=initMap" async defer></script>

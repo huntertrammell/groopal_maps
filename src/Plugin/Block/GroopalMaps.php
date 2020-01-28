@@ -53,7 +53,7 @@ class GroopalMaps extends BlockBase {
   public function build() {
     $build = [];
     $build['#theme'] = 'groopal_maps_block';
-    $build['#conten'][] = $this->configuration['google_maps_api_key'];
+    $build['#content']['api_key'] = $this->configuration['google_maps_api_key'];
 
     return $build;
   }
