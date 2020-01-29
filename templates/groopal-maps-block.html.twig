@@ -17,8 +17,12 @@
 <script>
 	var map;
 var locArr = '{{ content.locations.value }}';
+// replace html code injected by drupal
 var locFormat = locArr.replace(/&quot;/g, '"');
+// convert string to an array format
 var locParse = JSON.parse(locFormat);
+// assign parsed response to the locations variable to be assigned to the map
+// may need to add a few more layers of handling as JSON is sensative and would be easy for mistake to be made & break app
 var locations = locParse;
 
 function initMap() {

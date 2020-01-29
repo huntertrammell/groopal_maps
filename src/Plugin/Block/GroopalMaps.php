@@ -51,7 +51,7 @@ class GroopalMaps extends BlockBase {
       '#type' => 'text_format',
       '#title' => 'Locations',
       '#format' => 'plain_text',
-      '#description' => $this->t('Add locations in Javascript array format like above. [text that displays on click, latitude, longitude]'),
+      '#description' => $this->t('Add locations in Javascript array format like above. [["text that displays on click", latitude, longitude],["text that displays on click", latitude, longitude]]'),
       '#default_value' => $this->configuration['locations'],
       '#weight' => '0',
       '#required'=> TRUE
