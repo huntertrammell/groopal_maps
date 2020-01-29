@@ -33,7 +33,7 @@ function groopal_maps_theme() {
     ],
     'groopal_maps_block' => [
       'variables' => [
-        'content' => NULL
+        'content' => NULL,
       ],
       'render element' => 'children',
     ],

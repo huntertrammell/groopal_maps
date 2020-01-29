@@ -19,23 +19,12 @@ class GroopalMaps extends BlockBase {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return [
-    ] + parent::defaultConfiguration();
+    return [] + parent::defaultConfiguration();
   }
 
   /**
    * {@inheritdoc}
    */
-  	/* All configurations will be updated to be twig variables. possible to keep it simple can have 3 color profiles to choose from
-  // need to add field for the following:
-  //  Latitude/Longitude for centering,
-  //  Zoom
-  //  Map Height
-  //  Map Width
-  //  Map Colors (use google default select + have option for code editor to enter JSON)
-  //  Map Options - Relating to UI/UX
-  //  Locations - array, needs the following fields: title, address, link, lat, long
-  */
   public function blockForm($form, FormStateInterface $form_state) {
     $form['google_maps_api_key'] = [
       '#type' => 'textfield',
@@ -45,17 +34,17 @@ class GroopalMaps extends BlockBase {
       '#maxlength' => 255,
       '#size' => 64,
       '#weight' => '0',
-      '#required'=> TRUE
+      '#required' => TRUE,
     ];
-    $form['locations'] = array(
+    $form['locations'] = [
       '#type' => 'text_format',
       '#title' => 'Locations',
       '#format' => 'plain_text',
       '#description' => $this->t('Add locations in Javascript array format like above. [["text that displays on click", latitude, longitude],["text that displays on click", latitude, longitude]]'),
       '#default_value' => $this->configuration['locations'],
       '#weight' => '0',
-      '#required'=> TRUE
-    );
+      '#required' => TRUE,
+    ];
     $form['center_lat'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Latitude'),
@@ -64,7 +53,7 @@ class GroopalMaps extends BlockBase {
       '#maxlength' => 255,
       '#size' => 64,
       '#weight' => '0',
-      '#required'=> TRUE
+      '#required' => TRUE,
     ];
     $form['center_long'] = [
       '#type' => 'textfield',
@@ -74,7 +63,7 @@ class GroopalMaps extends BlockBase {
       '#maxlength' => 255,
       '#size' => 64,
       '#weight' => '0',
-      '#required'=> TRUE
+      '#required' => TRUE,
     ];
     $form['zoom'] = [
       '#type' => 'textfield',
@@ -84,7 +73,7 @@ class GroopalMaps extends BlockBase {
       '#maxlength' => 255,
       '#size' => 64,
       '#weight' => '0',
-      '#required'=> TRUE
+      '#required' => TRUE,
     ];
     $form['map_height'] = [
       '#type' => 'textfield',
@@ -94,7 +83,7 @@ class GroopalMaps extends BlockBase {
       '#maxlength' => 255,
       '#size' => 64,
       '#weight' => '0',
-      '#required'=> TRUE
+      '#required' => TRUE,
     ];
     $form['map_width'] = [
       '#type' => 'textfield',
@@ -104,32 +93,32 @@ class GroopalMaps extends BlockBase {
       '#maxlength' => 255,
       '#size' => 64,
       '#weight' => '0',
-      '#required'=> TRUE
+      '#required' => TRUE,
     ];
     $form['map_style'] = [
       '#type' => 'select',
       '#title' => $this->t('Select Color Style'),
       '#description' => $this->t('Specify what style profile you would like to use'),
-      '#options' => array(
-          0 => t('Default'),
-         1 => t('Silver'),
-         2 => t('Midnight'),
-         3 => t('Vintage'),
-         4 => t('Groopal'),
-       ),
+      '#options' => [
+        0 => t('Default'),
+        1 => t('Silver'),
+        2 => t('Midnight'),
+        3 => t('Vintage'),
+        4 => t('Groopal'),
+      ],
       '#default_value' => $this->configuration['map_style'],
-      '#required'=> TRUE
+      '#required' => TRUE,
     ];
-    $form['disable_ui'] = array (
+    $form['disable_ui'] = [
       '#type' => 'radios',
       '#title' => ('Disable default UI'),
       '#description' => $this->t('This will hide all buttons'),
       '#default_value' => $this->configuration['disable_ui'],
-      '#options' => array(
-        TRUE =>t('Yes'),
-        FALSE =>t('No')
-      ),
-    );
+      '#options' => [
+        TRUE => t('Yes'),
+        FALSE => t('No'),
+      ],
+    ];
     return $form;
   }
 
