@@ -12,7 +12,6 @@
     'clear-both',
 ] %}
 <div id="map" {{attributes.addClass(classes)}} style="height:{{content.height}};width:{{content.width}}"></div>
-{{kint(content)}}
 <script>
 var map;
 var locArr = '{{ content.locations.value }}';
