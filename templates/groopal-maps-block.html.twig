@@ -12,56 +12,43 @@
     'clear-both',
 ] %}
 
-<style>
-	#map {
-		height: 45vh;
-	}
-</style>
+<div id="map" {{attributes.addClass(classes)}} style="height:{{content.height}};width:{{content.width}}"></div>
 
-<div id="map" {{attributes.addClass(classes)}}></div>
 <script>
-	/* All configurations will be updated to be twig variables. possible to keep it simple can have 3 color profiles to choose from
-  // need to add field for the following:
-  //  Latitude,
-  //  Longitude,
-  //  Zoom
-  //  Map Height
-  //  Map Width
-  //  Map Colors (use google default select + have option for code editor to enter JSON)
-  //  Map Options - Relating to UI/UX
-  */
-var map;
+	var map;
+var locArr = '{{ content.locations.value }}';
+var locFormat = locArr.replace(/&quot;/g, '"');
+var locParse = JSON.parse(locFormat);
+var locations = locParse;
+
 function initMap() {
 map = new google.maps.Map(document.getElementById('map'), {
 center: {
-lat: 39.060347,
-lng: -94.505615
+lat: {{ content.lat }},
+lng: {{ content.long }}
 },
-zoom: 10,
-disableDefaultUI: true,
-MapOptions: {
-zoomControl: false,
-mapTypeControl: false,
-scaleControl: false,
-streetViewControl: false,
-rotateControl: false,
-fullscreenControl: false
-}
+zoom: {{ content.map_zoom }},
+disableDefaultUI: {{ content.ui }}
 });
-// need to update to marker cluster to allow multiple marker to be displayed
-var marker = new google.maps.Marker({
-position: {
-lat: 39.102565,
-lng: -94.583869
-},
-map: map,
-title: 'Central Library'
-});
-var infowindow = new google.maps.InfoWindow({content: marker.title});
 
-marker.addListener('click', function () {
-infowindow.open(map, marker);
+var infowindow = new google.maps.InfoWindow();
+
+var marker,
+i;
+
+for (i = 0; i < locations.length; i = i + 1) {
+marker = new google.maps.Marker({
+position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+map: map
 });
+
+google.maps.event.addListener(marker, 'click', (function (marker, i) {
+return function () {
+infowindow.setContent(locations[i][0]);
+infowindow.open(map, marker);
+};
+})(marker, i));
+}
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{content.api_key}}&callback=initMap" async defer></script>
